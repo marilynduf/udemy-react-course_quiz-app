@@ -14,25 +14,23 @@ export default function Quiz() {
         setUserAnswers((prevState) => [...prevState, answer]);
     }
 
-    const answers = QUESTIONS[activeQuestionIndex].answers.map(
-        (answer, index) => (
-            <li key={index} className="answer">
-                <button onClick={() => handleOnclick(answer)} key={answer}>
-                    {answer}
-                </button>
-            </li>
-        )
-    );
-
     const currentQuestion = QUESTIONS[activeQuestionIndex].text;
-    const suffledAnswers = [...answers].sort(() => Math.random() - 0.5);
+    const answers = [...QUESTIONS[activeQuestionIndex].answers]; // copie profonde du tableau
+    const suffledAnswers = answers.sort(() => Math.random() - 0.5); // rendu aleatoire des réponses
+    const mappedAnswers = suffledAnswers.map((answer, index) => (
+        <li key={index} className="answer">
+            <button onClick={() => handleOnclick(answer)} key={answer}>
+                {answer}
+            </button>
+        </li>
+    ));
 
     return (
         <>
             <section id="quiz">
                 <div id="question">
                     <h2>{currentQuestion}</h2>
-                    <ul id="answers">{suffledAnswers}</ul>
+                    <ul id="answers">{mappedAnswers}</ul>
                 </div>
             </section>
         </>
