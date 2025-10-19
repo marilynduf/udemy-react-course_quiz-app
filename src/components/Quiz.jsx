@@ -10,15 +10,6 @@ export default function Quiz() {
     const activeQuestionIndex = userAnswers.length;
     const quizDone = activeQuestionIndex === QUESTIONS.length;
 
-    if (quizDone) {
-        return (
-            <section id="summary">
-                <img src={imgQuizCompleted} alt="image quiz completed" />
-                <h2>Quiz completed</h2>
-            </section>
-        );
-    }
-
     const handleSelectAnswer = useCallback(function handleSelectAnswer(answer) {
         setUserAnswers((prevState) => [...prevState, answer]);
     }, []);
@@ -27,6 +18,15 @@ export default function Quiz() {
         () => handleSelectAnswer(null),
         [handleSelectAnswer]
     );
+
+    if (quizDone) {
+        return (
+            <section id="summary">
+                <img src={imgQuizCompleted} alt="image quiz completed" />
+                <h2>Quiz completed</h2>
+            </section>
+        );
+    }
 
     const currentQuestion = QUESTIONS[activeQuestionIndex].text;
     const answers = [...QUESTIONS[activeQuestionIndex].answers]; // copie profonde du tableau
