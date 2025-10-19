@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QUESTIONS from "../questions";
+import imgQuizCompleted from "../assets/quiz-complete.png";
 
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([]);
@@ -7,7 +8,12 @@ export default function Quiz() {
     const quizDone = activeQuestionIndex === QUESTIONS.length;
 
     if (quizDone) {
-        return <section>Reasult</section>;
+        return (
+            <section id="summary">
+                <img src={imgQuizCompleted} alt="image quiz completed" />
+                <h2>Quiz completed</h2>
+            </section>
+        );
     }
 
     function handleOnclick(answer) {
