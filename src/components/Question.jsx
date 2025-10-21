@@ -8,7 +8,6 @@ export default function Question({
     onSelectAnswers,
     onSkipAnswer,
 }) {
-    console.log(questionIndex);
     const [answer, setAnswer] = useState({
         selectedAnswer: "",
         isCorrect: null,
