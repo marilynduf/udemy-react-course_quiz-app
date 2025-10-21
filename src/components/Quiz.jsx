@@ -1,9 +1,7 @@
 import { useState, useCallback } from "react";
 import QUESTIONS from "../questions";
 import imgQuizCompleted from "../assets/quiz-complete.png";
-import ProgressBar from "./progressBar";
-
-const TIMER = 15000;
+import Question from "./Question";
 
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([]);
@@ -28,27 +26,15 @@ export default function Quiz() {
         );
     }
 
-    const currentQuestion = QUESTIONS[activeQuestionIndex].text;
-    const answers = [...QUESTIONS[activeQuestionIndex].answers]; // copie profonde du tableau
-    const suffledAnswers = answers.sort(() => Math.random() - 0.5); // rendu aleatoire des réponses
-    const mappedAnswers = suffledAnswers.map((answer) => (
-        <li key={answer} className="answer">
-            <button onClick={() => handleSelectAnswer(answer)}>{answer}</button>
-        </li>
-    ));
-
     return (
         <>
             <section id="quiz">
-                <div id="question">
-                    <ProgressBar
-                        key={activeQuestionIndex}
-                        timer={TIMER}
-                        onTimeout={handleSkipAnswer}
-                    />
-                    <h2>{currentQuestion}</h2>
-                    <ul id="answers">{mappedAnswers}</ul>
-                </div>
+                <Question
+                    key={activeQuestionIndex}
+                    questionIndex={activeQuestionIndex}
+                    onSelectAnswers={handleSelectAnswer}
+                    onSkipAnswer={handleSkipAnswer}
+                ></Question>
             </section>
         </>
     );
