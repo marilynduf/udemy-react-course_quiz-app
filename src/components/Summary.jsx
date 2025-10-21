@@ -7,11 +7,6 @@ export default function Summary({ userAnswers }) {
     const correctAnswers = userAnswers.filter(
         (answer, index) => answer === QUESTIONS[index].answers[0]
     );
-    // Wrong answers
-    const wrongAnswers = userAnswers.filter(
-        (answer, index) =>
-            answer !== QUESTIONS[index].answers[0] && answer !== null
-    );
 
     // % scrores
     const skipAnswersScore = Math.round(
@@ -20,9 +15,7 @@ export default function Summary({ userAnswers }) {
     const correctAnswersScore = Math.round(
         (correctAnswers.length / userAnswers.length) * 100
     );
-    const wrongAnswersScore = Math.round(
-        (wrongAnswers.length / userAnswers.length) * 100
-    );
+    const wrongAnswersScore = 100 - skipAnswersScore - correctAnswersScore;
 
     return (
         <section id="summary">
